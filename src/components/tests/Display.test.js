@@ -48,3 +48,16 @@ test('renders show season options matching your data when the button is clicked'
 
     expect(seasons).toHaveLength(4);
 });
+
+test("the functional prop is called when 'Get Show Data' button is clicked", async () => {
+    const mockDisplayFunc = jest.fn();
+
+    render(<Display show={testData} handleClick={mockDisplayFunc}/>);
+
+    const button = screen.getByRole(/button/i);
+    userEvent.click(button);
+
+    await mockDisplayFunc();
+
+    expect(mockDisplayFunc).toHaveBeenCalled();
+});
